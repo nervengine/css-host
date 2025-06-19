@@ -1,0 +1,267 @@
+:root {
+  --primary-blue: #083980;
+  --hover-blue: #d3f1ff;
+  --bg-light: #d3f1ff;
+  --bg-table-header: #eee;
+  --bg-paid: #d4edda;
+  --bg-unpaid: #e5ecfd;
+  --bg-loan: #fffbe6;
+  --font-main: "Roboto", sans-serif;
+  --btn-green: #00a41a;
+  --btn-blue: #3c8dbc;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+}
+
+body {
+  background-color: var(--bg-light);
+  font-size: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== Layout Structure ===== */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.top-nav {
+  background-color: #fff;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.top-nav h1 {
+  font-size: 1.5rem;
+  color: var(--primary-blue);
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 100%; !important
+}
+
+.sidebar {
+  background-color: var(--primary-blue);
+  color: white;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  text-align: left;
+  min-height: 100%;
+}
+
+.sidebar a {
+  padding: 1rem;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: var(--hover-blue);
+  font-weight: bold;
+  color: #083980;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  text-align: left;
+  background-color: var(--bg-light);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .sidebar a {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem;
+  }
+}
+
+/* ===== Tables ===== */
+table {
+  width: 100%;
+  max-width: 1250px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  border: 1px solid #999;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #999;
+  text-align: left;
+  vertical-align: middle;
+}
+
+thead th {
+  background-color: var(--bg-table-header);
+  cursor: pointer;
+}
+
+table.dashboard thead th {
+  position: sticky;
+  top: 0;
+  background: var(--btn-blue);
+  z-index: 10;
+  color: white;
+}
+
+.dashboard td table thead th {
+  position: sticky;
+  top: 0;
+  background: #cc7097;
+  z-index: 5;
+}
+
+.dashboard {
+  max-height: 680px;
+  overflow-y: auto;
+  display: block;
+}
+
+/* Table Row Highlights */
+.loan-row { background-color: var(--bg-loan); }
+.paid     { background-color: var(--bg-paid); }
+.unpaid   { background-color: var(--bg-unpaid); }
+
+/* Buttons */
+button,
+.pay_btn,
+.unpay_btn,
+.nav-button,
+.print-button {
+  font-size: inherit;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: background-color 0.3s ease;
+}
+
+.pay_btn {
+  background-color: blue;
+  width: 70px;
+}
+
+.unpay_btn {
+  background-color: limegreen;
+  width: 70px;
+}
+
+.nav-button {
+  margin: 10px 0;
+  background-color: var(--btn-green);
+}
+
+.print-button {
+  margin: 10px 0;
+  background-color: var(--btn-blue);
+}
+
+/* ===== Forms ===== */
+input[type="text"],
+input[type="number"],
+select {
+  text-transform: uppercase;
+  padding: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* Lists */
+ul,
+.loans_details ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+/* Nested loans_details table */
+.loans_details table {
+  width: 100%;
+  border-collapse: collapse;
+  line-height: 40px;
+}
+
+.loans_details th,
+.loans_details td {
+  padding: 6px;
+}
+
+.loans_details thead th {
+  background: var(--bg-table-header);
+}
+
+.print-button {
+  padding: 8px 16px;
+  margin: 10px 5px 0 0;
+  cursor: pointer;
+}
+
+/* ===== Print Styles ===== */
+@media print {
+  .print-button,
+  .search_bar,
+  form,
+  nav,
+  .pagination,
+  .filters,
+  .actions,
+  a[href*="logout"],
+  a[href*="add_loan"],
+  a[href*="due.php"] {
+    display: none !important;
+  }
+
+  body {
+    margin: 20px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  h2, td, th {
+    color: black !important;
+  }
+
+  thead th {
+    position: static !important;
+    background: white !important;
+  }
+}
