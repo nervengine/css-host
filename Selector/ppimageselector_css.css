@@ -1,0 +1,231 @@
+/* Main image selector container */
+.PP_imageselector {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .PP_imageselector {
+    grid-template-columns: repeat(5, 1fr); /* Max 5 per row on desktop */
+  }
+}
+
+/* Thumbnail container */
+.pp-thumbnail {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  padding: 5px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  overflow: visible;
+  transition: all 0.3s ease;
+  background: #fff;
+  margin-bottom:15px;
+  align-content: center;
+  z-index: 0;
+}
+
+/* Hover effect for thumbnail */
+.pp-thumbnail:hover {
+  scale: 1.1;
+  border-color: #20D6C9;
+  box-shadow: 0 0 10px rgba(32, 214, 201, 0.5);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.pp-thumbnail:hover .pp-icon {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+.pp-thumbnail.selected {
+  border-color: #20D6C9;
+}
+
+/* Thumbnail image */
+.pp-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Thumbnail icon (checkbox or plus) */
+.pp-icon,
+.pp-icon-placeholder,
+.pp-icon.pp-plus {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #20D6C9;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  z-index: 2;
+}
+
+.pp-thumbnail.selected .pp-icon {
+  background: #20D6C9;
+  color: #fff;
+}
+
+/* Label under thumbnail */
+.pp-label,
+.pp-label-only {
+  position: absolute;
+  bottom: 5px;
+  width: 93.5%;
+  padding: 3px 3px;
+  font-size: 13px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-weight: 500;
+  pointer-events: none;
+  word-wrap: break-word;
+}
+
+/* Input for "Other (Specify)" */
+.pp-oe-input {
+  width: 100%;
+  margin-top: 5px;
+  padding: 4px;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+/* Modal overlay for enlarged image */
+.pp-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal image */
+.pp-modal-content img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+/* Rank overlay styling */
+.pp-rank-overlay {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #ff9800;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 3;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+.pp-thumbnail.selected .pp-rank-overlay {
+  display: flex;
+}
+
+.pp-loader {
+  font-size: 16px;
+  text-align: center;
+  padding: 1rem;
+  color: #555;
+  font-style: italic;
+}
+
+
+/* ===============================
+   PPImageRank - Thumbnail Styling
+   =============================== */
+
+.pp-rank-thumbnail {
+  position: relative;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border 0.2s ease;
+}
+
+.pp-rank-thumbnail.ranked {
+  border-color: #007bff;
+}
+
+/* ===============================
+   Rank Badge Overlay
+   =============================== */
+
+.pp-rank-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ===============================
+   Controls: Reset + None of This
+   =============================== */
+
+.pp-rank-controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pp-rank-controls button {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pp-rank-controls button:hover {
+  background-color: #ddd;
+}
+
+.pp-rank-controls .pp-rank-dk.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}

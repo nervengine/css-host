@@ -1,0 +1,206 @@
+**Implement a jQuery plugin called `PPImageRank` that transforms dropdown-based image ranking survey questions into an interactive thumbnail UI**, following the full specification below.
+
+---
+
+## 📌 HTML Structure (Input Layout)
+
+The plugin targets this DOM structure:
+
+* A container: `.answers-list`
+* Each `.element` contains:
+
+  * A `<label>` with:
+
+    * An `<img class="survey_image">` image
+    * Text label (e.g. car name)
+  * A `<select>` dropdown with rank options (`0` = 1st, `1` = 2nd, …)
+  * Optionally:
+
+    * An "Other specify" OE input (`<input type="text">`)
+    * A DK checkbox (`<input type="checkbox">`)
+
+### ✔️ Example Elements:
+
+```html
+<label for="ans5189.0.9">
+  <img src="..." class="survey_image" />
+  <br>Volvo XC60
+</label>
+
+<select name="ans5189.0.9">
+  <option value="-1">Select one...</option>
+  <option value="0">1st</option>
+  <option value="1">2nd</option>
+</select>
+
+<!-- Other specify (OE) -->
+<input type="text" class="oe" data-cell="QRANK1_r98" />
+
+<!-- DK checkbox -->
+<input type="checkbox" id="_v2_na_QRANK1.r99" />
+```
+
+---
+
+## 🧠 Functional Requirements
+
+### 1. 🖼️ **Thumbnail Generation**
+
+* Hides the original `.answers-list`
+* Creates a new div `PP_imagerank`, replacing it with:
+
+  * Thumbnails (150×150 px) for each `.survey_image`
+  * A label/caption below image (if `withLabel: 1`)
+  * (+) icon for Fancybox (if `popup: 1`)
+* Max **5 thumbnails per row**
+* Use Fancybox-compatible `data-fancybox` if enabled
+
+---
+
+### 2. 🔢 **Ranking Logic**
+
+* Only one thumbnail per rank allowed
+* Selecting a rank already used:
+
+  * Clears the previous selection
+  * Reassigns if needed
+* Clicking a thumbnail assigns a rank
+
+  * OE entry only becomes rankable if input is non-empty
+* Overlay shows current rank (e.g., `1st`) in the top-right corner
+* Re-clicking removes the rank and shifts others up accordingly
+* If a selection is removed:
+
+  * Other ranks shift down (e.g., 3rd → 2nd)
+
+---
+
+### 3. ✍️ **Other Specify (withOE)**
+
+* Activated by: `withOE: 'r98'`
+* Finds: `[data-cell*="r98"] input[type="text"]`
+* Logic:
+
+  * Rank applies **only if** text is filled
+  * Clearing text removes rank and resets thumbnail
+  * Clicking thumbnail focuses OE input and activates select dropdown
+  * Check icon shown only if OE has text + rank
+
+---
+
+### 4. ❌ **None of This / DK (withDK)**
+
+* Activated by: `withDK: 'r99'`
+* Finds: `input[type="checkbox"][id*="r99"]`
+* Logic:
+
+  * When DK is checked:
+
+    * All dropdowns are cleared and disabled
+    * OE field is cleared and disabled
+    * Thumbnails are visually dimmed / disabled
+  * When any rank is selected:
+
+    * DK auto-unchecks and becomes re-enabled
+
+---
+
+### 5. ♻️ **Reset Support**
+
+* If `.pp-reset` button is present:
+
+  * Clears all dropdowns
+  * Clears OE field
+  * Unchecks DK
+  * Restores all thumbnails to unselected state
+
+---
+
+### 6. 🔄 **Thumbnail–Select Sync**
+
+* Bi-directional sync:
+
+  * Clicking thumbnail updates select
+  * Changing select updates thumbnail
+* Changes in one reflect immediately in the other
+
+---
+
+### 7. 🕐 **Preloader Support**
+
+* `.answers-list` is hidden at start
+* `.pp-preloader` shown during image processing
+* After image load completes (via `Promise.all` or `setTimeout`):
+
+  * Thumbnails are shown
+  * Preloader is removed
+
+---
+
+### 8. 🎨 **Visual Feedback**
+
+* Selected items show:
+
+  * Badge with rank number
+  * Highlight (border, background)
+* OE:
+
+  * Shows ✔️ checkmark when text is filled and ranked
+* DK:
+
+  * Dims all thumbnails
+  * Makes them unclickable
+* (+) popup icon replaced by badge after rank is applied
+
+---
+
+### 9. 🧑‍🦽 **Accessibility Requirements**
+
+* Tab support:
+
+  * Thumbnails should be keyboard focusable
+* Enter or Space should trigger rank selection
+* OE should be focusable when selected
+* Add appropriate ARIA roles (optional)
+
+---
+
+### 10. ⚙️ **Config Options**
+
+```js
+PPImageRank({
+  minRank: 1,     // optional: minimum number of required ranks
+  maxRank: 10,    // optional: default based on dropdown options
+  withOE: 'r98',  // OE identifier (via data-cell)
+  withDK: 'r99',  // DK checkbox identifier
+  withLabel: 1,   // 1 to show label below image
+  popup: 1,       // 1 to enable Fancybox popups
+  enableReset: true // enables .pp-reset support
+});
+```
+
+---
+
+### 11. ✅ Summary of Key Selectors
+
+| Feature     | Selector                                |
+| ----------- | --------------------------------------- |
+| Rank select | `.answers-list select.dropdown`         |
+| Image       | `label img.survey_image`                |
+| OE text     | `[data-cell*="r98"] input[type="text"]` |
+| DK checkbox | `input[type="checkbox"][id*="r99"]`     |
+| Reset Btn   | `.pp-reset`                             |
+
+---
+
+## ✅ Output Expectations
+
+* A fully initialized, stylized interactive UI using cloned thumbnails.
+* Original inputs (dropdowns, OE, DK) remain in the DOM and in sync.
+* Gracefully degrades if no JS is available.
+
+---
+
+## ✅ Final Note
+
+Use jQuery, ensure clean modularity, and optionally support plugin chaining (`return this.each...` style).

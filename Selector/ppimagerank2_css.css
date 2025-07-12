@@ -1,0 +1,179 @@
+/* 📦 Image Rank Grid Container */
+.PP_imagerank {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .PP_imagerank {
+    grid-template-columns: repeat(5, 1fr); /* Max 5 per row on desktop */
+  }
+}
+
+/* 🖼️ Thumbnail Container */
+.pp-thumbnail {
+  position: relative;
+  width: 150px;
+  aspect-ratio: 1 / 1;
+  padding: 5px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  overflow: visible;
+  transition: all 0.3s ease;
+  background: #fff;
+  margin-bottom: 15px;
+  align-content: center;
+  z-index: 0;
+  box-sizing: border-box;
+}
+
+.pp-thumbnail:hover {
+  scale: 1.1;
+  border-color: #20D6C9;
+  box-shadow: 0 0 10px rgba(32, 214, 201, 0.5);
+  transform: translateY(-2px);
+  z-index: 1;
+}
+
+/* 🖼️ Thumbnail Image */
+.pp-thumbnail img {
+  width: 100% !important;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* 🏷️ Label Below Image */
+.pp-label {
+  position: absolute;
+  bottom: 5px;
+  width: 93.5%;
+  padding: 3px 5px;
+  font-size: 13px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-weight: 500;
+  pointer-events: none;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* 🔢 Rank Badge */
+.pp-badge {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  background: #20D6C9;
+  color: white;
+  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-weight: bold;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 🔍 Zoom Icon */
+.pp-icon,
+.pp-icon-placeholder,
+.pp-icon.pp-plus {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #20D6C9;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  z-index: 2;
+}
+
+/* 🔄 Loading Preloader */
+.pp-preloader {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+  padding: 1.5rem;
+}
+
+/* 🚫 Disabled Thumbnail */
+.pp-thumbnail.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+
+/* ✅ Ranked State */
+.pp-thumbnail.ranked {
+  border-color: #20D6C9;
+}
+
+/* ⚠️ Error Message */
+.pp-error {
+  display: none;
+  color: red;
+  font-weight: bold;
+  margin: 10px 0;
+  padding: 5px 10px;
+  background-color: #ffeaea;
+  border: 1px solid #f5c2c2;
+  border-radius: 6px;
+}
+
+/* 🔁 Reset Button */
+.pp-reset {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #168A82;
+  color: white;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 112px;
+}
+
+.pp-reset:hover {
+  background-color: #20D6C9;
+}
+
+/* ❓ Don't Know (DK) Wrapper */
+.pp-dk {
+  margin: 20px auto;
+  width: fit-content;
+  background: #168A82;
+  padding: 5px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  color: white;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+}
+
+.pp-dk:hover {
+  background-color: #20D6C9;
+}
+
+/* 📝 Text Input Fix */
+input[type="text"] {
+  padding: 0.25em 0.5em;
+  width: 130px;
+  margin: auto;
+}
