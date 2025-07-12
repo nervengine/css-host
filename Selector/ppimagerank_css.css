@@ -1,7 +1,7 @@
 /* Container */
 .PP_imagerank {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   justify-content: center;
   gap: 10px;
   margin-bottom: 1.5rem;
@@ -16,8 +16,8 @@
 /* Thumbnail box */
 .pp-thumbnail {
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
   padding: 5px;
   border: 2px solid transparent;
   border-radius: 10px;
