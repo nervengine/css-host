@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/codemirror.js"
+      }
+    },
+    "condition": {
+      "urlFilter": "codemirror.js",
+      "resourceTypes": ["script"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/codemirror.css"
+      }
+    },
+    "condition": {
+      "urlFilter": "codemirror.css",
+      "resourceTypes": ["stylesheet"]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "url": "https://nervengine.github.io/css-host/xmleditor.js"
+      }
+    },
+    "condition": {
+      "urlFilter": "lumos/xmleditor/main.js",
+      "resourceTypes": ["script"]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "url": "https://nervengine.github.io/css-host/xmleditor.css"
+      }
+    },
+    "condition": {
+      "urlFilter": "lumos/xmleditor/main.css",
+      "resourceTypes": ["stylesheet"]
+    }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "url": "https://nervengine.github.io/css-host/loader.gif"
+      }
+    },
+    "condition": {
+      "urlFilter": "spinner_1.gif",
+      "resourceTypes": ["image"]
+    }
+  }
+]
